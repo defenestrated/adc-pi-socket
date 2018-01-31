@@ -1,0 +1,26 @@
+{
+  "name": "sentient-display",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "budo main.js --live --verbose --port 3000 --open",
+    "deploy": "browserify main.js | uglifyjs > bundle.js && ghpages",
+    "ghpages": "ghpages"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "adc-pi-gpio": "0.0.2",
+    "adc-pi-spi": "0.0.1",
+    "express": "^4.15.2",
+    "lodash": "^4.17.4",
+    "mcp-spi-adc": "^1.0.0",
+    "onoff": "^1.1.9",
+    "pi-gpio": "0.0.8",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "budo": "^10.0.4",
+    "ghpages": "0.0.10"
+  }
+}

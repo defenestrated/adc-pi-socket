@@ -1,0 +1,17 @@
+body {
+  background: grey;
+  margin: 0;
+  padding: 0;
+}
+
+.reading-display {
+	height: 12.5vh;
+  padding: 10px;
+	font: normal normal 12px/1.2em monospace;
+  border-bottom: 0.5px solid black;
+  box-sizing: border-box;
+}
+
+.data-point {
+  /* padding: 10px; */
+}

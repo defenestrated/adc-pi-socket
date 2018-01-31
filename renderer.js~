@@ -1,0 +1,3 @@
+socket.on("reading", function(reading) {
+  console.log(reading)
+})

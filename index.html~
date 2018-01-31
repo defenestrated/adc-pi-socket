@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <title>photocell reader test</title>
+    </head>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+     var socket = io();
+    </script>
+
+    <body>
+        <h1 id="reading0">
+            <h2></h2>
+        </h1>
+        <h1 id="reading1">
+            <h2></h2>
+        </h1>
+        <h1 id="reading2">
+            <h2></h2>
+        </h1>
+        <h1 id="reading3">
+            <h2></h2>
+        </h1>
+    </body>
+
+    <script src="renderer.js" type="text/javascript"></script>
+</html>

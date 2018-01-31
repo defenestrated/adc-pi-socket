@@ -1,0 +1,26 @@
+socket.on("setup", function(data) {
+  console.log(data)
+
+  _(data.openchannels).times(i => {
+    var wrapper = document.createElement("div")
+    wrapper.classList.add("reading-display")
+    wrapper.id = "reading" + i
+    _(2).times(i => {
+      var dp = document.createElement("div")
+      dp.classList.add("data-point")
+      wrapper.append(dp)
+    })
+    document.querySelector("body").append(wrapper)
+  })
+})
+
+
+socket.on("reading", function(data) {
+
+  var box = document.querySelector(".reading-display#reading" + data.chnum)
+  box.children[0].innerHTML = "raw value: <span class='value'>" + data.reading.rawValue + "</span>"
+  box.children[1].innerHTML = "value: <span class='value'>" + data.reading.value + "</span>"
+
+  box.setAttribute("style","background-color: rgba(255,255,255," + data.reading.value + ")")
+  // console.log(reading)
+})
