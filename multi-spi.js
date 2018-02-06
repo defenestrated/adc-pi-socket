@@ -7,21 +7,40 @@ var _ = require('lodash'); // utility
 
 app.use(express.static('assets'))
 
-var openchannels = 8
+var openchannels = 4
 
 var readings = _.times(openchannels)
 
-var channels = _(openchannels).times(i => {
-  return mcpadc.open(i, {speedHz: 1350000}, function() {
-    var cmp = this
-    setInterval(function() {
-      mark(i);
-    }, 100)
+console.log({speedHz: 1350000, busNumber:1, deviceNumber:0})
+
+var channels = [
+  mcpadc.open(3, {speedHz: 1350000, busNumber:1, deviceNumber:0}, function() {
+    setInterval(function(){mark(0)}, 100)
+  }),
+  mcpadc.open(1, {speedHz: 1350000, busNumber:1, deviceNumber:1}, function() {
+    setInterval(function(){mark(1)}, 100)
+  }),
+  mcpadc.open(1, {speedHz: 1350000, busNumber:1, deviceNumber:2}, function() {
+    setInterval(function(){mark(2)}, 100)
+  }),
+  mcpadc.open(5, {speedHz: 1350000, busNumber:1, deviceNumber:2}, function() {
+    setInterval(function(){mark(3)}, 100)
   })
-});
+]
+
+
+// var channels = _(openchannels).times(i => {
+  // return mcpadc.open(i, {speedHz: 1350000}, function() {
+    // var cmp = this
+    // setInterval(function() {
+      // mark(i);
+    // }, 100)
+  // })
+// });
 
 // console.log(readings)
 console.log("starting up with " + openchannels + " channels")
+console.log(channels)
 
 function mark(chnum) {
   var read = channels[chnum].read(function(err, reading) {

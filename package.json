@@ -2,9 +2,9 @@
   "name": "sentient-display",
   "version": "0.0.1",
   "description": "",
-  "main": "main.js",
+  "main": "multi-spi.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "node multi-spi.js"
   },
   "license": "MIT",
   "dependencies": {
