@@ -8,35 +8,42 @@ var _ = require('lodash'); // utility
 app.use(express.static('assets'))
 
 var openchannels = 4
+// RIGHT NOW SUPPORTS UP TO 24 (could potentially extend to 40)
 
 var readings = _.times(openchannels)
 
 console.log({speedHz: 1350000, busNumber:1, deviceNumber:0})
 
-var channels = [
-  mcpadc.open(3, {speedHz: 1350000, busNumber:1, deviceNumber:0}, function() {
-    setInterval(function(){mark(0)}, 100)
-  }),
-  mcpadc.open(1, {speedHz: 1350000, busNumber:1, deviceNumber:1}, function() {
-    setInterval(function(){mark(1)}, 100)
-  }),
-  mcpadc.open(1, {speedHz: 1350000, busNumber:1, deviceNumber:2}, function() {
-    setInterval(function(){mark(2)}, 100)
-  }),
-  mcpadc.open(5, {speedHz: 1350000, busNumber:1, deviceNumber:2}, function() {
-    setInterval(function(){mark(3)}, 100)
+
+// to individually load channels,  vv uncomment vv
+// var channels = [
+//   mcpadc.open(3, {speedHz: 1350000, busNumber:1, deviceNumber:0}, function() {
+//     setInterval(function(){mark(0)}, 100)
+//   }),
+//   mcpadc.open(1, {speedHz: 1350000, busNumber:1, deviceNumber:1}, function() {
+//     setInterval(function(){mark(1)}, 100)
+//   }),
+//   mcpadc.open(1, {speedHz: 1350000, busNumber:1, deviceNumber:2}, function() {
+//     setInterval(function(){mark(2)}, 100)
+//   }),
+//   mcpadc.open(5, {speedHz: 1350000, busNumber:1, deviceNumber:2}, function() {
+//     setInterval(function(){mark(3)}, 100)
+//   })
+// ]
+
+
+// programmatically load channels:
+var channels = _(openchannels).times(i => {
+  return mcpadc.open(i, {
+    speedHz: 1350000,
+    busNumber: 1,
+    deviceNumber: Math.floor(i/8)
+  }, function() {
+    setInterval(function() {
+      mark(i);
+    }, 100)
   })
-]
-
-
-// var channels = _(openchannels).times(i => {
-  // return mcpadc.open(i, {speedHz: 1350000}, function() {
-    // var cmp = this
-    // setInterval(function() {
-      // mark(i);
-    // }, 100)
-  // })
-// });
+});
 
 // console.log(readings)
 console.log("starting up with " + openchannels + " channels")
